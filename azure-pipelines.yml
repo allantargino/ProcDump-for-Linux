@@ -62,10 +62,11 @@ extends:
 
           - template: templates/build.yaml@ProcDump
 
-          # - script: |
-          #     cd procdump_build/tests/integration
-          #     ./run.sh
-          #   displayName: 'Run unit tests'
+          - script: |
+              cd procdump_build/tests/integration
+              ./run.sh
+            displayName: 'Run unit tests'
+            retryCountOnTaskFailure: 5
 
         - job: "ProcDump_Build_AMD64_Run_Tests"
           pool:
@@ -100,6 +101,7 @@ extends:
               cd procdump_build/tests/integration
               ./run.sh
             displayName: 'Run unit tests'
+            retryCountOnTaskFailure: 5
 
         - job: "ProcDump_Build_MACOS_Run_Tests"
           pool:
@@ -121,3 +123,4 @@ extends:
               cd procdump_build/tests/integration
               sudo ./run.sh
             displayName: 'Run unit tests'
+            retryCountOnTaskFailure: 5
