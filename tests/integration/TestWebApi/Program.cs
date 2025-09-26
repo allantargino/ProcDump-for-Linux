@@ -1,4 +1,9 @@
+using System.Diagnostics;
 using System.Runtime.InteropServices;
+
+var coreAssemblyInfo = FileVersionInfo.GetVersionInfo(typeof(object).Assembly.Location);
+Console.WriteLine($".NET version: {coreAssemblyInfo.ProductVersion}");
+Console.WriteLine($"Location of System.Private.CoreLib.dll: {typeof(object).Assembly.Location}");
 
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
