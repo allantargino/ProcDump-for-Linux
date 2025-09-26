@@ -49,8 +49,10 @@ wget https://github.com/debbuild/debbuild/releases/download/22.02.1/debbuild_22.
 arch=$(uname -m)
 if [[ "$arch" == "aarch64" ]]; then
     suffix="arm64"
+    apt -y install ./dotnet/libicu72_72.1-3+deb12u1_arm64.deb 
 else
     suffix="x64"
+    apt -y install ./dotnet/libicu72_72.1-3+deb12u1_amd64.deb 
 fi
 
 pushd .
@@ -69,7 +71,6 @@ popd
 rm -rf $dotnet_temp
 
 apt -y install \
-    ./dotnet/libicu72_72.1-3+deb12u1_amd64.deb \
     ./dotnet/dotnet-runtime-deps-$suffix.deb \
     ./dotnet/dotnet-host-$suffix.deb \
     ./dotnet/dotnet-apphost-pack-$suffix.deb \
