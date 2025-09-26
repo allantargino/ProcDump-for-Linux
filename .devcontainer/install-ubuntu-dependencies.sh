@@ -55,11 +55,15 @@ fi
 
 pushd .
 dotnet_temp=$(mktemp -d)
+
+cp ./dotnet/aspnetcore-runtime-10.0.0-rc.1.25451.107-linux-$suffix.tar.gz $dotnet_temp/aspnetcore-10-runtime.tar.gz
+
 cd $dotnet_temp
 
 wget -O dotnet-10-sdk.tar.gz https://builds.dotnet.microsoft.com/dotnet/Sdk/10.0.100-rc.1.25451.107/dotnet-sdk-10.0.100-rc.1.25451.107-linux-$suffix.tar.gz
 mkdir -p /usr/share/dotnet
 tar -xvf dotnet-10-sdk.tar.gz -C /usr/share/dotnet
+tar -xvf aspnetcore-10-runtime.tar.gz -C /usr/share/dotnet
 
 popd
 rm -rf $dotnet_temp
