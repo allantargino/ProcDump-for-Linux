@@ -65,6 +65,7 @@ popd
 rm -rf $dotnet_temp
 
 apt -y install \
+    ./dotnet/libicu72_72.1-3+deb12u1_amd64.deb \
     ./dotnet/dotnet-runtime-deps-$suffix.deb \
     ./dotnet/dotnet-host-$suffix.deb \
     ./dotnet/dotnet-apphost-pack-$suffix.deb \
