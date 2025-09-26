@@ -68,6 +68,13 @@ tar -xvf dotnet-10-runtime.tar.gz -C /usr/share/dotnet
 popd
 rm -rf $dotnet_temp
 
+export PATH=$PATH:/usr/share/dotnet
+
+set -x
+dotnet --list-runtimes
+dotnet --list-sdks
+dotnet --info
+set +x
 # arch=$(uname -m)
 # if [[ "$arch" == "aarch64" ]]; then
 #     wget https://dot.net/v1/dotnet-install.sh 
