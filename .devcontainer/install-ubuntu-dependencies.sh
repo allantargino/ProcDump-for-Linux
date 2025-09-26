@@ -35,9 +35,11 @@ apt upgrade -y \
 # Build and install bpftool
 rm -rf /usr/sbin/bpftool
 git clone --recurse-submodules https://github.com/libbpf/bpftool.git
+pushd .
 cd bpftool/src
 make install
 ln -s /usr/local/sbin/bpftool /usr/sbin/bpftool
+popd
 
 # install debbuild
 wget https://github.com/debbuild/debbuild/releases/download/22.02.1/debbuild_22.02.1-0ubuntu20.04_all.deb \
