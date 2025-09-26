@@ -64,13 +64,13 @@ tar -xvf dotnet-10-sdk.tar.gz -C /usr/share/dotnet
 popd
 rm -rf $dotnet_temp
 
-sudo apt install \
-    ./dotnet-runtime-deps-$suffix.deb \
-    ./dotnet-host-$suffix.deb \
-    ./dotnet-apphost-pack-$suffix.deb \
-    ./dotnet-hostfxr-$suffix.deb \
-    ./dotnet-targeting-pack-$suffix.deb \
-    ./dotnet-runtime-$suffix.deb
+apt -y install \
+    ./dotnet/dotnet-runtime-deps-$suffix.deb \
+    ./dotnet/dotnet-host-$suffix.deb \
+    ./dotnet/dotnet-apphost-pack-$suffix.deb \
+    ./dotnet/dotnet-hostfxr-$suffix.deb \
+    ./dotnet/dotnet-targeting-pack-$suffix.deb \
+    ./dotnet/dotnet-runtime-$suffix.deb
 
 export PATH=$PATH:/usr/share/dotnet
 
