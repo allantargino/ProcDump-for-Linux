@@ -45,8 +45,7 @@ popd
 wget https://github.com/debbuild/debbuild/releases/download/22.02.1/debbuild_22.02.1-0ubuntu20.04_all.deb \
     && dpkg -i debbuild_22.02.1-0ubuntu20.04_all.deb
 
-# Install .NET 10 SDK and runtime
-dotnet_temp=$(mktemp -d)
+# Install .NET 10 SDK
 arch=$(uname -m)
 if [[ "$arch" == "aarch64" ]]; then
     suffix="arm64"
@@ -54,19 +53,24 @@ else
     suffix="x64"
 fi
 
-cp ./dotnet/dotnet-10-runtime-$suffix.tar.gz $dotnet_temp/dotnet-10-runtime.tar.gz
 pushd .
+dotnet_temp=$(mktemp -d)
 cd $dotnet_temp
 
 wget -O dotnet-10-sdk.tar.gz https://builds.dotnet.microsoft.com/dotnet/Sdk/10.0.100-rc.1.25451.107/dotnet-sdk-10.0.100-rc.1.25451.107-linux-$suffix.tar.gz
-# wget -O dotnet-10-runtime.tar.gz https://aka.ms/dotnet/10.0/daily/dotnet-runtime-linux-$suffix.tar.gz
-
 mkdir -p /usr/share/dotnet
 tar -xvf dotnet-10-sdk.tar.gz -C /usr/share/dotnet
-tar -xvf dotnet-10-runtime.tar.gz -C /usr/share/dotnet
 
 popd
 rm -rf $dotnet_temp
+
+sudo apt install \
+    ./dotnet-runtime-deps-$suffix.deb \
+    ./dotnet-host-$suffix.deb \
+    ./dotnet-apphost-pack-$suffix.deb \
+    ./dotnet-hostfxr-$suffix.deb \
+    ./dotnet-targeting-pack-$suffix.deb \
+    ./dotnet-runtime-$suffix.deb
 
 export PATH=$PATH:/usr/share/dotnet
 
