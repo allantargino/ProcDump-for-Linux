@@ -56,7 +56,7 @@ fi
 pushd .
 dotnet_temp=$(mktemp -d)
 
-cp ./dotnet/aspnetcore-runtime-10.0.0-rc.1.25451.107-linux-$suffix.tar.gz $dotnet_temp/aspnetcore-10-runtime.tar.gz
+cp ./dotnet/aspnetcore-runtime-10.0.0-rtm.25476.104-linux-$suffix.tar.gz $dotnet_temp/aspnetcore-10-runtime.tar.gz
 
 cd $dotnet_temp
 
