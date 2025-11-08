@@ -39,7 +39,7 @@ extends:
             type: linux
             hostArchitecture: arm64
           variables:
-            LinuxContainerImage: 'mcr.microsoft.com/mirror/docker/library/ubuntu:22.04'
+            LinuxContainerImage: 'mcr.microsoft.com/mirror/docker/library/debian:bullseye'
             ob_outputDirectory: '$(Build.SourcesDirectory)\out'
           steps:
           - script: |
@@ -60,7 +60,13 @@ extends:
               gcc --version
             displayName: 'List compiler versions'
 
+          - script: |
+              find / -name libcrypto.so.3
+            displayName: 'Locate OpenSSL library'
+
           - template: templates/build.yaml@ProcDump
+            parameters: 
+              ldpath: /usr/local/openssl-3/lib/
 
           - script: |
               cd procdump_build/tests/integration
@@ -71,7 +77,7 @@ extends:
           pool:
             type: linux
           variables:
-            LinuxContainerImage: 'mcr.microsoft.com/mirror/docker/library/ubuntu:22.04'
+            LinuxContainerImage: 'mcr.microsoft.com/mirror/docker/library/debian:bullseye'
             ob_outputDirectory: '$(Build.SourcesDirectory)\out'
           steps:
           - script: |
@@ -93,6 +99,8 @@ extends:
             displayName: 'List compiler versions'
 
           - template: templates/build.yaml@ProcDump
+            parameters: 
+              ldpath: /usr/local/openssl-3/lib64/
 
           - script: |
               apt install -y iproute2
